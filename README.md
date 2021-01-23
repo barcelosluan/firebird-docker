@@ -1,10 +1,8 @@
 # How to use:
 
-Just execute ```build.sh {image_and_container_name}``` passing a parameter for the image and container name, and it will do everything you need. Exemple:
+Just execute ```build.sh {image_and_container_name}``` passing a parameter for the image and container name, and it will do everything you need.
 
-```shell
-./build.sh my-name
-```
+Exemple: ```./build.sh my-name```
 
 Important folders:
 	* data: to store your db
