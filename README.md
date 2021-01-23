@@ -4,7 +4,7 @@ Just execute ```build.sh {image_and_container_name}``` passing a parameter for t
 
 Exemple: ```./build.sh my-name```
 
-Important folders:
+* Important folders:
 	* data: to store your db
 	* etc: fb configs
 
@@ -46,10 +46,10 @@ docker run -d \
     firebird:2.5-ss
 ```
 
-	* Optional: If you want to set a specific user, password or database, use the following parameters at docker run:
-		* -e FIREBIRD_USER=SYSDBA
-		* -e FIREBIRD_PASSWORD=masterkey
-		* -e FIREBIRD_DATABASE=database.fdb
+* Optional: If you want to set a specific user, password or database, use the following parameters at docker run:
+	* -e FIREBIRD_USER=SYSDBA
+	* -e FIREBIRD_PASSWORD=masterkey
+	* -e FIREBIRD_DATABASE=database.fdb
 
 6. If you do not set a specific password it will generate a random one. To check it:
 
