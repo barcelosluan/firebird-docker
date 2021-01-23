@@ -8,7 +8,7 @@ Exemple: ```./build.sh my-name```
 	* data: to store your db
 	* etc: fb configs
 
-Optional: If you need to use the password elsewhere, use the printed one at the first line
+* Optional: If you need to use the password elsewhere, use the printed one at the first line
 
 # Steps to standalone build:
 
