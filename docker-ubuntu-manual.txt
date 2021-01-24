@@ -1,0 +1,53 @@
+# Criando o docker do firebird com base na imagem do ubuntu manualmente:
+
+
+# Mude as permissões do banco para 777
+chmod 777 /caminho/para/banco.fdb
+
+
+
+# Crie o container a partir da imagem oficial do ubuntu 18.04:
+docker run -it \
+    --name ${FB_NAME} \
+    -v ${FB_PATH}/volume/:/firebird/ \
+    ubuntu:18.04
+
+
+
+# Dentro do docker...
+echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections  # Evita erros de frontend interativo no apt...
+
+mkdir /home/firebird && cd /home/firebird \
+    && apt update \
+    && apt-get install -qy --no-install-recommends \
+        wget \
+        bzip2 \
+        ca-certificates \
+        libcurl3-gnutls \
+    && wget https://github.com/FirebirdSQL/firebird/releases/download/R2_5_9/FirebirdSS-2.5.9.27139-0.amd64.tar.gz \
+    && tar -xf FirebirdSS-2.5.9.27139-0.amd64.tar.gz \
+    && cd FirebirdSS-2.5.9.27139-0.amd64 \
+    && ./install.sh  # O firebird instalado em /opt !!!!!!!!!!!!
+
+
+
+# É necessario digitar a seguir no terminal:
+[ENTER]  # para continuar
+
+masterkey  # senha para o SYSDBA
+
+
+
+# Finalizada a instalação, execute os comandos:
+ln -s /opt/firebird/lib/libfbclient.so.2 /usr/lib/x86_64-linux-gnu/
+
+
+
+# Limpando o container...
+apt-get purge -qy --auto-remove \
+        wget \
+        bzip2 \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && cd / \
+    && rm -rf /home/firebird

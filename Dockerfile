@@ -1,12 +1,13 @@
 # Forked from jacobalberty/firebird:2.5-ss
 
-FROM debian:jessie
+FROM ubuntu:18.04
 LABEL maintainer="contato@barcelosluan.dev"
 
 ENV PREFIX=/usr/local/firebird
 ENV VOLUME=/firebird
 ENV DEBIAN_FRONTEND noninteractive
 ENV FBURL=https://github.com/FirebirdSQL/firebird/releases/download/R2_5_9/Firebird-2.5.9.27139-0.tar.bz2
+ENV LIBICU=http://mirrors.kernel.org/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.8_amd64.deb
 ENV DBPATH=/firebird/data
 
 RUN apt-get update \
@@ -16,12 +17,14 @@ RUN apt-get update \
         curl \
         g++ \
         gcc \
-        libicu52 \
         libicu-dev \
         libncurses5-dev \
         make \
+        multiarch-support \
     && mkdir -p /home/firebird \
     && cd /home/firebird \
+    && curl -L -o libicu52.deb -L ${LIBICU} \
+    && dpkg -i libicu52.deb \
     && curl -L -o firebird-source.tar.bz2 -L ${FBURL} \
     && tar --strip=1 -xf firebird-source.tar.bz2 \
     && ./configure --enable-superserver \

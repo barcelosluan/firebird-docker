@@ -1,3 +1,6 @@
+# THIS IS A WIP PROJECT... DO NOT BUILD THIS ONE, USE THE STEPS IN .TXT FILE !!!
+
+
 # How to use:
 
 Just execute ```build.sh {image_and_container_name}``` passing a parameter for the image and container name, and it will do everything you need. Exemple:
